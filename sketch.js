@@ -10,8 +10,14 @@ let path = [
     [50*2-25, 50*15-25],
 ];
 
+let turrets = [];
+let enemies = [];
+
 function setup() {
     createCanvas(850, 700);
+
+    turrets.push( new Turret(2, 1) );
+    enemies.push( new Enemy() );
 }
 
 function draw() {
@@ -49,9 +55,9 @@ function draw() {
 
     fill(255);
     textSize(20);
-    text("Score:", 20, 32);
-    text("Wave:", 220, 32);
-    text("Money:", 420, 32);
+    text("Score: 0", 20, 32);
+    text("Wave: 0", 220, 32);
+    text("Money: 0", 420, 32);
 
     // Right bar
     fill(255);
@@ -59,4 +65,14 @@ function draw() {
     text("Ground", 680, 100);
     text("Air", 680, 250);
 
+
+    // Update turrets
+    turrets.forEach(function(turret) {
+        turret.update();
+    });
+
+    // Update enemies
+    enemies.forEach(function(enemy) {
+        enemy.update();
+    });
 }

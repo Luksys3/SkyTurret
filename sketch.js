@@ -11,18 +11,23 @@ let path = [
 ];
 
 let turrets = [];
-let enemies = [];
-let a = 250, k = 250;
-let b = new Bullet(0, 0, a, k);
+let enemies = {};
+let bullets = {};
 
 function setup() {
     createCanvas(850, 700);
 
     turrets.push( new Turret(5, 4) );
     turrets.push( new Turret(8, 8) );
+
+
     for(let i = 0; i < 5; i++){
-      enemies.push( new Enemy(40*i) );
+        enemies[i] = new Enemy(i, 40*i);
     }
+
+    bullets[0] = new Bullet(0, 500, 500, 0);
+    bullets[1] = new Bullet(1, 550, 500, 0);
+    bullets[2] = new Bullet(2, 570, 500, 0);
 }
 
 function draw() {
@@ -55,9 +60,11 @@ function draw() {
     strokeWeight(0);
 
     // Update enemies
-    enemies.forEach(function(enemy) {
+    for( let key in enemies ){
+        if( typeof(enemies[key]) === 'undefined' ) continue;
+        let enemy = enemies[key];
         enemy.update();
-    });
+    };
 
     // Top bar
     fill(51);
@@ -81,5 +88,10 @@ function draw() {
         turret.update();
     });
 
-    b.update();
+    // Update bullets
+    for( let key in bullets ){
+        if( typeof(bullets[key]) === 'undefined' ) continue;
+        let bullet = bullets[key];
+        bullet.update();
+    };
 }

@@ -40,16 +40,18 @@ function Turret(posx, posy) {
         let aim = [];
         let minDist = -1;
 
-        enemies.forEach( (en) => {
+        for( let key in enemies ){
+            let en = enemies[key];
+
             let distance = dist(this.cx, this.cy, en.x, en.y);
-            if( distance > this.range ) return; // Out of range
+            if( distance > this.range ) continue; // Out of range
 
             if( minDist > distance || minDist == -1 ) {
                 minDist = distance;
                 aim[0] = en.x;
                 aim[1] = en.y;
             }
-        });
+        };
 
         if( !aim.length ) return;
         this.aim = changeLineLen(this.cx, this.cy, aim[0], aim[1], this.cannonLen);

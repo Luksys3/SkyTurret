@@ -2,7 +2,11 @@ function Enemy(space) {
     this.x = path[0][0];
     this.y = path[0][1] - 20 - space;
 
-    this.health = 100
+    this.damage = 4;
+
+    this.healthMax = 20;
+    this.healthCurrent = this.healthMax;
+
     this.type = "ground";
     this.mspeed = 4;
 
@@ -12,13 +16,29 @@ function Enemy(space) {
     this.update = function() {
 
         this.move();
+        this.hit();
         this.draw();
     }
 
+    this.hit = function(){
+      if( dist(this.x, this.y, b.x, b.y) < 5 && this.healthCurrent > 0){
+        this.healthCurrent -= this.damage;
+      }
+    }
+
     this.draw = function() {
+
         fill(20);
         strokeWeight(0);
         ellipse(this.x, this.y, 16);
+
+        fill(255, 0, 0);
+        strokeWeight(0);
+        rect(this.x - 6, this.y - 16, 14, 3);
+
+        fill(0, 255, 0);
+        strokeWeight(0);
+        rect(this.x - 6, this.y - 16, map(this.healthCurrent, 0, this.healthMax, 0, 14 ), 3);
     }
 
     this.move = function(){

@@ -1,4 +1,15 @@
 
+let path = [
+    [50*2-25, 50],
+    [50*2-25, 50*4-25],
+    [50*12-25, 50*4-25],
+    [50*12-25, 50*12-25],
+    [50*7-25, 50*12-25],
+    [50*7-25, 50*8-25],
+    [50*2-25, 50*8-25],
+    [50*2-25, 50*15-25],
+];
+
 function setup() {
     createCanvas(850, 700);
 }
@@ -14,13 +25,6 @@ function draw() {
     // Top bar
     fill(255);
     textSize(20);
-    text("Score:", 20, 32);
-    text("Wave:", 220, 32);
-    text("Money:", 420, 32);
-
-    // Top bar
-    fill(255);
-    textSize(20);
     text("Ground", 680, 100);
     text("Air", 680, 250);
 
@@ -30,15 +34,20 @@ function draw() {
     noFill();
 
     beginShape();
-    vertex(60*2, 50+10);
-    vertex(60*2, 50);
-    vertex(60*2, 60*3);
-    vertex(60*9, 60*3);
-    vertex(60*9, 60*10);
-    vertex(60*6, 60*10);
-    vertex(60*6, 60*6);
-    vertex(60*2, 60*6);
-    vertex(60*2, 60*13);
+    path.forEach(function(c) {
+        vertex(c[0], c[1]);
+    });
     endShape();
+    strokeWeight(0);
+
+    // Top bar
+    fill(51);
+    rect(0, 0, 850, 50);
+
+    fill(255);
+    textSize(20);
+    text("Score:", 20, 32);
+    text("Wave:", 220, 32);
+    text("Money:", 420, 32);
 
 }

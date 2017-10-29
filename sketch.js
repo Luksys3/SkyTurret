@@ -22,11 +22,14 @@ function draw() {
     fill(0, 150, 0);
     rect(0, 50, 650, 700);
 
-    // Top bar
-    fill(255);
-    textSize(20);
-    text("Ground", 680, 100);
-    text("Air", 680, 250);
+    // Draw grid
+    stroke(255);
+    strokeWeight(1.2);
+    for(let i=50; i<650; i+=50) {
+        line(i, 50, i, 700);
+        line(0, 50+i, 650, 50+i);
+    }
+    strokeWeight(0);
 
     // Path
     stroke(153, 77, 0);
@@ -49,5 +52,11 @@ function draw() {
     text("Score:", 20, 32);
     text("Wave:", 220, 32);
     text("Money:", 420, 32);
+
+    // Right bar
+    fill(255);
+    textSize(20);
+    text("Ground", 680, 100);
+    text("Air", 680, 250);
 
 }

@@ -49,6 +49,11 @@ function draw() {
     endShape();
     strokeWeight(0);
 
+    // Update enemies
+    enemies.forEach(function(enemy) {
+        enemy.update();
+    });
+
     // Top bar
     fill(51);
     rect(0, 0, 850, 50);
@@ -69,10 +74,5 @@ function draw() {
     // Update turrets
     turrets.forEach(function(turret) {
         turret.update();
-    });
-
-    // Update enemies
-    enemies.forEach(function(enemy) {
-        enemy.update();
     });
 }

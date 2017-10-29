@@ -16,8 +16,9 @@ let enemies = [];
 function setup() {
     createCanvas(850, 700);
 
-    turrets.push( new Turret(2, 1) );
-    for(let i = 0; i < 10; i++){
+    turrets.push( new Turret(5, 4) );
+    turrets.push( new Turret(8, 8) );
+    for(let i = 0; i < 5; i++){
       enemies.push( new Enemy(40*i) );
     }
 }

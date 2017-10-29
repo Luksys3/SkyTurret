@@ -1,4 +1,6 @@
 function Turret(posx, posy) {
+    this.cannonLen = 18;
+
     this.x = posx*50;
     this.y = posy*50+50;
     this.cx = this.x+25;
@@ -6,12 +8,13 @@ function Turret(posx, posy) {
     this.posx = posx;
     this.posy = posy;
 
-    this.cannonAngle = 0;
     this.focus = 'nearest';
-    this.range = 150;
+    this.range = 150 + 10;
+
+    this.aim = changeLineLen(this.cx, this.cy, this.cx-1, this.cy, this.cannonLen);
 
     this.update = function() {
-        this.aimCannon();
+        this.calAim();
 
         this.draw();
     }
@@ -22,47 +25,33 @@ function Turret(posx, posy) {
         strokeWeight(3);
         ellipse(this.cx, this.cy, 30);
 
-        stroke(0);
-        strokeWeight(6);
-        translate(this.cx, this.cy);
-        rotate( this.cannonAngle );
-        line(-18, 0, 0, 0);
-        translate(-this.cx, -this.cy);
-
         noFill();
         stroke(255);
         strokeWeight(1);
-        ellipse(this.cx, this.cy, this.range);
+        ellipse(this.cx, this.cy, this.range*2);
+
+        stroke(0);
+        strokeWeight(6);
+
+        line(this.cx, this.cy, this.aim[0], this.aim[1]);
     }
 
-    this.aimCannon = function() {
-        let aim = this.getAim();
-
-        let xabs = aim[0] - this.cx;
-        let yabs = aim[1] - this.cy;
-
-        let angel = atan(yabs/xabs);
-        if( mouseX >= this.cx ) {
-            angel -= radians(180);
-        }
-        this.cannonAngle = angel;
-    }
-
-    this.getAim = function() {
+    this.calAim = function() {
         let aim = [];
         let minDist = -1;
 
-        enemies.forEach(function(en) {
+        enemies.forEach( (en) => {
             let distance = dist(this.cx, this.cy, en.x, en.y);
             if( distance > this.range ) return; // Out of range
 
-            if( minDist > distance ) {
+            if( minDist > distance || minDist == -1 ) {
                 minDist = distance;
                 aim[0] = en.x;
                 aim[1] = en.y;
             }
         });
 
-        return aim;
+        if( !aim.length ) return;
+        this.aim = changeLineLen(this.cx, this.cy, aim[0], aim[1], this.cannonLen);
     }
 }

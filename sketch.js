@@ -12,6 +12,8 @@ let path = [
 
 let turrets = [];
 let enemies = [];
+let a = 250, k = 250;
+let b = new Bullet(0, 0, a, k);
 
 function setup() {
     createCanvas(850, 700);
@@ -78,4 +80,6 @@ function draw() {
     turrets.forEach(function(turret) {
         turret.update();
     });
+
+    b.update();
 }

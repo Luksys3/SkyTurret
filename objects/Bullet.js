@@ -21,7 +21,7 @@ function Bullet(id, x, y, enemyID){
     }
 
     this.draw = function(){
-        fill(20);
+        fill(200);
         strokeWeight(0);
         ellipse(this.x, this.y, 10);
     }
@@ -35,8 +35,16 @@ function Bullet(id, x, y, enemyID){
             angle -= radians(180);
         }
 
+        let distance = dist(this.x, this.y, this.dx, this.dy);
+        if( distance < this.speed ) {
+          this.x = this.dx;
+          this.y = this.dy;
+          return;
+        }
+
         this.x += this.speed * cos(angle);
         this.y += this.speed * sin(angle);
+
     }
 
     this.collision = function() {

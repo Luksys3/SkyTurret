@@ -15,6 +15,11 @@ let enemies = {};
 let bullets = {};
 
 let bulletIDCount = 0;
+let enemyIDCount = 0;
+let waveNr = 0;
+let enemyType = 0;
+let enemyCount = 5;
+let enemyHealth = 0;
 
 function setup() {
     createCanvas(850, 700);
@@ -23,9 +28,6 @@ function setup() {
     turrets.push( new Turret(8, 8) );
     turrets.push( new Turret(10, 3) );
 
-    for(let i = 0; i < 15; i++){
-        enemies[i] = new Enemy(i, 40*i);
-    }
 }
 
 function draw() {
@@ -57,13 +59,6 @@ function draw() {
     endShape();
     strokeWeight(0);
 
-    // Update enemies
-    for( let key in enemies ){
-        if( typeof(enemies[key]) === 'undefined' ) continue;
-        let enemy = enemies[key];
-        enemy.update();
-    };
-
     // Top bar
     fill(51);
     rect(0, 0, 850, 50);
@@ -79,7 +74,18 @@ function draw() {
     textSize(20);
     text("Ground", 680, 100);
     text("Air", 680, 250);
+    rect(660, 305, 180, 80);
+    fill(51);
+    rect(670, 315, 160, 60);
+    fill(255);
+    text("Next Wave", 700, 350);
 
+    // Update enemies
+    for( let key in enemies ){
+        if( typeof(enemies[key]) === 'undefined' ) continue;
+        let enemy = enemies[key];
+        enemy.update();
+    };
 
     // Update turrets
     turrets.forEach(function(turret) {
@@ -92,4 +98,29 @@ function draw() {
         let bullet = bullets[key];
         bullet.update();
     };
+}
+
+function mouseClicked() {
+  if(mouseX > 670 && mouseX < 830 && mouseY > 315 && mouseY < 375){
+    Wave();
+  }
+
+}
+
+function Wave(){
+
+  console.log("Vyksta");
+    waveNr++;
+    //this.enemyType = random;
+    enemyCount += 1;
+    enemyHealth += 10;
+
+    let c = enemyIDCount;
+    for(let i = c; i < c+enemyCount; i++){
+      enemies[i] = new Enemy(i, 40*i);
+      console.log("add");
+      enemyIDCount++;
+    }
+
+
 }

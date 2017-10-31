@@ -37,6 +37,9 @@ function Enemy(id, space) {
 
     this.takeDamage = function(damage) {
         this.health -= damage;
+        if(this.health <= 0){
+          this.die();
+        }
     }
 
     this.draw = function() {
@@ -44,15 +47,16 @@ function Enemy(id, space) {
         fill(20);
         strokeWeight(0);
         ellipse(this.x, this.y, 16);
+        if(this.health != this.healthMax){
+                fill(255, 0, 0);
+                strokeWeight(0);
+                rect(this.x - 7, this.y - 16, 14, 3);
 
-        fill(255, 0, 0);
-        strokeWeight(0);
-        rect(this.x - 7, this.y - 16, 14, 3);
-
-        fill(0, 255, 0);
-        strokeWeight(0);
-        rect(this.x - 7, this.y - 16, map(this.health, 0, this.healthMax, 0, 14 ), 3);
-    }
+                fill(0, 255, 0);
+                strokeWeight(0);
+                rect(this.x - 7, this.y - 16, map(this.health, 0, this.healthMax, 0, 14 ), 3);
+            }
+  }
 
     this.movement = function(){
         if(this.pathI !== this.pathIM){

@@ -14,20 +14,18 @@ let turrets = [];
 let enemies = {};
 let bullets = {};
 
+let bulletIDCount = 0;
+
 function setup() {
     createCanvas(850, 700);
 
     turrets.push( new Turret(5, 4) );
     turrets.push( new Turret(8, 8) );
+    turrets.push( new Turret(10, 3) );
 
-
-    for(let i = 0; i < 5; i++){
+    for(let i = 0; i < 15; i++){
         enemies[i] = new Enemy(i, 40*i);
     }
-
-    bullets[0] = new Bullet(0, 500, 500, 0);
-    bullets[1] = new Bullet(1, 550, 500, 0);
-    bullets[2] = new Bullet(2, 570, 500, 0);
 }
 
 function draw() {

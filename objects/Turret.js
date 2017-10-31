@@ -8,13 +8,27 @@ function Turret(posx, posy) {
     this.posx = posx;
     this.posy = posy;
 
-    this.focus = 'nearest';
+    this.focusType = '';
+    this.focus = -1;
     this.range = 150 + 10;
 
-    this.aim = changeLineLen(this.cx, this.cy, this.cx-1, this.cy, this.cannonLen);
+    this.shootDelayCounter = 0;
+
+    this.aim = [this.cx + this.cannonLen, this.cy];
+
+    this.enemiesInRange = [];
 
     this.update = function() {
+        this.getEnemiesInRange();
+
         this.calAim();
+        this.findFocus();
+
+        if( this.shootDelayCounter >= 20 ){
+            this.shoot();
+            this.shootDelayCounter = 0;
+        }
+        this.shootDelayCounter++;
 
         this.draw();
     }
@@ -37,23 +51,42 @@ function Turret(posx, posy) {
     }
 
     this.calAim = function() {
-        let aim = [];
-        let minDist = -1;
+        if( this.focus == -1 ) return;
+        if( typeof(enemies[this.focus]) == 'undefined' ) return;
 
+        let enx = enemies[this.focus].x;
+        let eny = enemies[this.focus].y;
+
+        this.aim = changeLineLen(this.cx, this.cy, enx, eny, this.cannonLen);
+    }
+
+    this.getEnemiesInRange = function() {
+        this.enemiesInRange = [];
         for( let key in enemies ){
             let en = enemies[key];
 
             let distance = dist(this.cx, this.cy, en.x, en.y);
             if( distance > this.range ) continue; // Out of range
 
-            if( minDist > distance || minDist == -1 ) {
-                minDist = distance;
-                aim[0] = en.x;
-                aim[1] = en.y;
-            }
+            // Add to enemiesInRange
+            this.enemiesInRange.push(key);
         };
+    }
 
-        if( !aim.length ) return;
-        this.aim = changeLineLen(this.cx, this.cy, aim[0], aim[1], this.cannonLen);
+    this.findFocus = function() {
+        if( typeof(this.enemiesInRange[0]) == 'undefined' ){
+            this.focus = -1;
+            return;
+        }
+
+        if( this.focusType == '' ) {
+            this.focus = this.enemiesInRange[0];
+        }
+    }
+
+    this.shoot = function() {
+        if( this.focus == -1 ) return;
+        bullets[bulletIDCount] = new Bullet(bulletIDCount, this.cx, this.cy, this.focus);
+        bulletIDCount++;
     }
 }

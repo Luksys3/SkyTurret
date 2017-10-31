@@ -6,7 +6,7 @@ function Enemy(id, space) {
     this.health = this.healthMax;
 
     this.type = "ground";
-    this.mspeed = 4;
+    this.mspeed = 2;
 
     this.pathI = 0;
     this.pathIM = path.length;
@@ -22,18 +22,6 @@ function Enemy(id, space) {
 
         this.draw();
     }
-
-    // this.hit = function(){
-    //     for( let key in bullets ){
-    //         if( typeof(bullets[key]) === 'undefined' ) continue;
-    //         let bullet = bullets[key];
-    //
-    //         if( dist(this.x, this.y, bullet.x, bullet.y) < 5 && this.health > 0 ){
-    //             console.log(dist(this.x, this.y, bullet.x, bullet.y));
-    //             this.health -= this.damage;
-    //         }
-    //     };
-    // }
 
     this.takeDamage = function(damage) {
         this.health -= damage;

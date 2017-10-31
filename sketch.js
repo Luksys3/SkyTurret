@@ -108,18 +108,17 @@ function mouseClicked() {
 }
 
 function Wave(){
-
-  console.log("Vyksta");
     waveNr++;
     //this.enemyType = random;
     enemyCount += 1;
     enemyHealth += 10;
 
     let c = enemyIDCount;
+    let a = 0;
     for(let i = c; i < c+enemyCount; i++){
-      enemies[i] = new Enemy(i, 40*i);
-      console.log("add");
+      enemies[i] = new Enemy(i, 40*a);
       enemyIDCount++;
+      a++;
     }
 
 

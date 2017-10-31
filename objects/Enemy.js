@@ -6,7 +6,7 @@ function Enemy(id, space) {
     this.health = this.healthMax;
 
     this.type = "ground";
-    this.mspeed = 2;
+    this.mspeed = 5;
 
     this.pathI = 0;
     this.pathIM = path.length;

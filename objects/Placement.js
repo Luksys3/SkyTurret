@@ -3,7 +3,7 @@ function Placement(){
   this.turretSelect = false;
 
   this.cX = -1;
-  this.cY = -2;
+  this.cY = -1;
   this.inRange = false;
 
   this.update = function(){

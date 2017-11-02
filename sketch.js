@@ -10,30 +10,31 @@ let path = [
     [50*2-25, 50*15-25],
 ];
 
-let turrets = [];
+let turrets = {};
 let enemies = {};
 let bullets = {};
 
 let bulletIDCount = 0;
 let enemyIDCount = 0;
-let waveNr = 0;
-let enemyType = 0;
-let enemyCount = 5;
-let enemyHealth = 0;
+
+let wave = new Wave();
+
+let money = 0;
 
 let placement = new Placement();
 
 function setup() {
     createCanvas(850, 700);
 
-    turrets.push( new Turret(5, 4) );
-    turrets.push( new Turret(8, 8) );
-    turrets.push( new Turret(10, 3) );
+    newTurret({x: 5, y: 4});
+    newTurret({x: 8, y: 8});
+    newTurret({x: 10, y: 3});
 
 
 }
 
 function draw() {
+
     background(51);
 
     // Map
@@ -62,26 +63,12 @@ function draw() {
     endShape();
     strokeWeight(0);
 
-    // Top bar
-    fill(51);
-    rect(0, 0, 850, 50);
-
-    fill(255);
-    textSize(20);
-    text("Score: 0", 20, 32);
-    text("Wave: 0", 220, 32);
-    text("Money: 0", 420, 32);
-
-    // Right bar
-    fill(255);
-    textSize(20);
-    text("Ground", 680, 100);
-    text("Air", 680, 250);
-    rect(660, 305, 180, 80);
-    fill(51);
-    rect(670, 315, 160, 60);
-    fill(255);
-    text("Next Wave", 700, 350);
+    // Update bullets
+    for( let key in bullets ){
+        if( typeof(bullets[key]) === 'undefined' ) continue;
+        let bullet = bullets[key];
+        bullet.update();
+    };
 
     // Update enemies
     for( let key in enemies ){
@@ -91,44 +78,53 @@ function draw() {
     };
 
     // Update turrets
-    turrets.forEach(function(turret) {
+    for( let key in turrets ){
+        if( typeof(turrets[key]) === 'undefined' ) continue;
+        let turret = turrets[key];
         turret.update();
-    });
-
-    // Update bullets
-    for( let key in bullets ){
-        if( typeof(bullets[key]) === 'undefined' ) continue;
-        let bullet = bullets[key];
-        bullet.update();
     };
+
+    // Updates top and right bar
+    updateBars();
 
     placement.update();
 }
 
 function mouseClicked() {
   if(mouseX > 670 && mouseX < 830 && mouseY > 315 && mouseY < 375){
-    Wave();
+      wave.next();
   }
 
   if(mouseX > 660 && mouseX < 710 && mouseY > 500 && mouseY < 550){
     placement.turretSelected();
   }
-
 }
 
-function Wave(){
-    waveNr++;
-    //this.enemyType = random;
-    enemyCount += 1;
-    enemyHealth += 10;
+function updateBars() {
+    strokeWeight(0);
 
-    let c = enemyIDCount;
-    let a = 0;
-    for(let i = c; i < c+enemyCount; i++){
-      enemies[i] = new Enemy(i, 40*a);
-      enemyIDCount++;
-      a++;
-    }
+    // - Top bar
+    fill(51);
+    rect(0, 0, 850, 50);
 
+    fill(255);
+    textSize(20);
+    text("Score: 0", 20, 32);
+    text("Wave: "+ wave.wave, 220, 32);
+    text("Money: "+ money, 420, 32);
 
+    // - Right bar
+    fill(51);
+    rect(650, 50, 850, 700);
+
+    // Next wave
+    fill(255);
+    textSize(20);
+    text("Ground", 680, 100);
+    text("Air", 680, 250);
+    rect(660, 305, 180, 80);
+    fill(51);
+    rect(670, 315, 160, 60);
+    fill(255);
+    text("Next Wave", 700, 350);
 }

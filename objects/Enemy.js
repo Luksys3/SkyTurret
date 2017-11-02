@@ -1,12 +1,14 @@
-function Enemy(id, space) {
+function Enemy(options) {
+    this.id = options.id;
+    this.award = options.award;
     this.x = path[0][0];
-    this.y = path[0][1] - 20 - space;
+    this.y = path[0][1] - 20 - options.space;
 
-    this.healthMax = 20;
+    this.healthMax = options.health;
     this.health = this.healthMax;
 
     this.type = "ground";
-    this.mspeed = 5;
+    this.mspeed = 1;
 
     this.pathI = 0;
     this.pathIM = path.length;
@@ -36,14 +38,14 @@ function Enemy(id, space) {
         strokeWeight(0);
         ellipse(this.x, this.y, 16);
         if(this.health != this.healthMax){
-                fill(255, 0, 0);
-                strokeWeight(0);
-                rect(this.x - 7, this.y - 16, 14, 3);
+            fill(255, 0, 0);
+            strokeWeight(0);
+            rect(this.x - 7, this.y - 16, 14, 3);
 
-                fill(0, 255, 0);
-                strokeWeight(0);
-                rect(this.x - 7, this.y - 16, map(this.health, 0, this.healthMax, 0, 14 ), 3);
-            }
+            fill(0, 255, 0);
+            strokeWeight(0);
+            rect(this.x - 7, this.y - 16, map(this.health, 0, this.healthMax, 0, 14 ), 3);
+        }
   }
 
     this.movement = function(){
@@ -124,6 +126,7 @@ function Enemy(id, space) {
     }
 
     this.die = function() {
-        delete enemies[id];
+        money += this.award;
+        delete enemies[this.id];
     }
 }

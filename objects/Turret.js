@@ -19,9 +19,6 @@ function Turret(options) {
 
     this.enemiesInRange = [];
 
-    // Reduce money
-    money -= 30;
-
     this.update = function() {
         this.getEnemiesInRange();
 

@@ -32,6 +32,9 @@ function newEnemy(options) {
 }
 
 function newTurret(options) {
+    if( money < 30 ) return;
+    money -= 30;
+
     let id = makeid();
     options.id = id;
     turrets[id] = new Turret(options);

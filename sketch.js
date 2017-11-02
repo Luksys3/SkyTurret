@@ -98,6 +98,10 @@ function mouseClicked() {
   if(mouseX > 660 && mouseX < 710 && mouseY > 500 && mouseY < 550){
     placement.turretSelected();
   }
+
+  if(placement.turretSelect && placement.cX != -1 && placement.cY != -1){
+    newTurret({x: placement.cX, y: placement.cY});
+  }
 }
 
 function updateBars() {

@@ -17,24 +17,16 @@ let bullets = {};
 let bulletIDCount = 0;
 let enemyIDCount = 0;
 
+let money = 60;
+
 let wave = new Wave();
-
-let money = 0;
-
 let placement = new Placement();
 
 function setup() {
     createCanvas(850, 700);
-
-    newTurret({x: 5, y: 4});
-    newTurret({x: 8, y: 8});
-    newTurret({x: 10, y: 3});
-
-
 }
 
 function draw() {
-
     background(51);
 
     // Map

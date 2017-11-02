@@ -21,12 +21,15 @@ let enemyType = 0;
 let enemyCount = 5;
 let enemyHealth = 0;
 
+let placement = new Placement();
+
 function setup() {
     createCanvas(850, 700);
 
     turrets.push( new Turret(5, 4) );
     turrets.push( new Turret(8, 8) );
     turrets.push( new Turret(10, 3) );
+
 
 }
 
@@ -98,11 +101,17 @@ function draw() {
         let bullet = bullets[key];
         bullet.update();
     };
+
+    placement.update();
 }
 
 function mouseClicked() {
   if(mouseX > 670 && mouseX < 830 && mouseY > 315 && mouseY < 375){
     Wave();
+  }
+
+  if(mouseX > 660 && mouseX < 710 && mouseY > 500 && mouseY < 550){
+    placement.turretSelected();
   }
 
 }

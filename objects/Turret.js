@@ -1,18 +1,19 @@
-function Turret(posx, posy) {
+function Turret(options) {
     this.cannonLen = 18;
 
-    this.x = posx*50;
-    this.y = posy*50+50;
+    this.posx = options.x;
+    this.posy = options.y;
+    this.x = this.posx * 50;
+    this.y = this.posy * 50+50;
     this.cx = this.x+25;
     this.cy = this.y+25;
-    this.posx = posx;
-    this.posy = posy;
 
     this.focusType = '';
     this.focus = -1;
     this.range = 150 + 10;
 
-    this.shootDelayCounter = 0;
+    this.shootDelay = 60;
+    this.shootDelayCounter = this.shootDelay;
 
     this.aim = [this.cx + this.cannonLen, this.cy];
 
@@ -24,7 +25,7 @@ function Turret(posx, posy) {
         this.calAim();
         this.findFocus();
 
-        if( this.shootDelayCounter >= 20 ){
+        if( this.shootDelayCounter >= this.shootDelay && this.focus != -1 ){
             this.shoot();
             this.shootDelayCounter = 0;
         }
@@ -34,19 +35,29 @@ function Turret(posx, posy) {
     }
 
     this.draw = function() {
+        // Turret
         fill(51);
+
+        strokeWeight(0);
+        let offset = 11, size = 10;
+        ellipse(this.cx + offset, this.cy + offset, size);
+        ellipse(this.cx - offset, this.cy + offset, size);
+        ellipse(this.cx + offset, this.cy - offset, size);
+        ellipse(this.cx - offset, this.cy - offset, size);
+
         stroke(100);
         strokeWeight(3);
         ellipse(this.cx, this.cy, 30);
 
-        noFill();
-        stroke(255);
-        strokeWeight(1);
-        ellipse(this.cx, this.cy, this.range*2);
+        // Range
+        // noFill();
+        // stroke(255);
+        // strokeWeight(1);
+        // ellipse(this.cx, this.cy, this.range*2);
 
+        // Cannon
         stroke(0);
         strokeWeight(6);
-
         line(this.cx, this.cy, this.aim[0], this.aim[1]);
     }
 

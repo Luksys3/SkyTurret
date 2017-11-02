@@ -23,7 +23,7 @@ function Bullet(id, x, y, enemyID){
     this.draw = function(){
         fill(200);
         strokeWeight(0);
-        ellipse(this.x, this.y, 10);
+        ellipse(this.x, this.y, 5);
     }
 
     this.movement = function(){
@@ -48,7 +48,7 @@ function Bullet(id, x, y, enemyID){
     }
 
     this.collision = function() {
-        if( dist(this.x, this.y, this.dx, this.dy) < 5 ){
+        if( dist(this.x, this.y, this.dx, this.dy) < 16 ){
             if( typeof(enemies[enemyID]) !== 'undefined' ) {
                 enemies[enemyID].takeDamage( this.damage );
             }

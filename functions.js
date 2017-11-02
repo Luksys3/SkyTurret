@@ -24,3 +24,26 @@ function changeLineLen(x1, y1, x2, y2, radius) {
 
     return [x3, y3];
 }
+
+function newEnemy(options) {
+    let id = makeid();
+    options.id = id;
+    enemies[id] = new Enemy(options);
+}
+
+function newTurret(options) {
+    let id = makeid();
+    options.id = id;
+    turrets[id] = new Turret(options);
+}
+
+function makeid() {
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for (var i = 0; i < 9; i++) {
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+
+    return text;
+}

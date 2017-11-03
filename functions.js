@@ -39,7 +39,8 @@ function newTurret(options) {
     options.id = id;
     turrets[id] = new Turret(options);
 
-    takenPos.push(options.x +'-'+ options.y);
+    let key = options.x +'_'+ options.y;
+    takenPos[key] = 'turret';
 }
 
 function makeid() {
@@ -51,4 +52,16 @@ function makeid() {
     }
 
     return text;
+}
+
+// Return boolean if object has property
+function hasOwnProperty(obj, prop) {
+    var proto = obj.__proto__ || obj.constructor.prototype;
+    return (prop in obj) &&
+        (!(prop in proto) || proto[prop] !== obj[prop]);
+}
+
+// Uses global takenPos = {}
+function posTaken(x, y) {
+    return hasOwnProperty(takenPos, x +'_'+ y);
 }

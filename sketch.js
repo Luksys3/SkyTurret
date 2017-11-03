@@ -13,7 +13,7 @@ let path = [
 let turrets = {};
 let bullets = {};
 let enemies = {};
-let takenPos = [];
+let takenPos = {};
 
 let bulletIDCount = 0;
 let enemyIDCount = 0;

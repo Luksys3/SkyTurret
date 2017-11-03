@@ -41,11 +41,11 @@ function Placement(){
   }
 
   this.getCursor = function(){
+    if(this.cX != int(mouseX / 50) || this.cY != int((mouseY - 50) / 50)){
+      this.cX = int(mouseX / 50);
+      this.cY = int((mouseY - 50) / 50);
+    }
     this.checkInRange();
-      if(this.cX != int(mouseX / 50) || this.cY != int((mouseY - 50) / 50)){
-        this.cX = int(mouseX / 50);
-        this.cY = int((mouseY - 50) / 50);
-      }
     }
 
   this.checkInRange = function(){

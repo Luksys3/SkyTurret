@@ -77,7 +77,7 @@ function Placement(){
        }
     }
     this.inRange = true;
-    if(this.inRange){
+    if(this.inRange && !posTaken(this.cX, this.cY)){
 
       this.draw2();
     }

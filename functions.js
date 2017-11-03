@@ -65,3 +65,36 @@ function hasOwnProperty(obj, prop) {
 function posTaken(x, y) {
     return hasOwnProperty(takenPos, x +'_'+ y);
 }
+
+function drawTurret(x, y, aim = '') {
+    let cannonLen = 18;
+    let cx = x * 50 + 25;
+    let cy = y * 50 + 25 + 50;
+
+    if(aim === '') aim = [cx + cannonLen, cy];
+
+    // Turret
+    fill(51);
+
+    strokeWeight(0);
+    let offset = 11, size = 10;
+    ellipse(cx + offset, cy + offset, size);
+    ellipse(cx - offset, cy + offset, size);
+    ellipse(cx + offset, cy - offset, size);
+    ellipse(cx - offset, cy - offset, size);
+
+    stroke(100);
+    strokeWeight(3);
+    ellipse(cx, cy, 30);
+
+    // Range
+    // noFill();
+    // stroke(255);
+    // strokeWeight(1);
+    // ellipse(this.cx, this.cy, this.range*2);
+
+    // Cannon
+    stroke(0);
+    strokeWeight(6);
+    line(cx, cy, aim[0], aim[1]);
+}

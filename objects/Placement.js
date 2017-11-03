@@ -20,9 +20,8 @@ function Placement(){
     rect(660, 500, 50, 50);
   }
   this.draw2 = function(){
-    fill(255);
-    strokeWeight(0);
-    rect(this.cX * 50 + 5, this.cY * 50 + 55, 40, 40);
+      if( this.cX == -1 && this.cY == -1 ) return;
+      drawTurret(this.cX, this.cY);
   }
 
   this.turretSelected = function(){

@@ -35,30 +35,7 @@ function Turret(options) {
     }
 
     this.draw = function() {
-        // Turret
-        fill(51);
-
-        strokeWeight(0);
-        let offset = 11, size = 10;
-        ellipse(this.cx + offset, this.cy + offset, size);
-        ellipse(this.cx - offset, this.cy + offset, size);
-        ellipse(this.cx + offset, this.cy - offset, size);
-        ellipse(this.cx - offset, this.cy - offset, size);
-
-        stroke(100);
-        strokeWeight(3);
-        ellipse(this.cx, this.cy, 30);
-
-        // Range
-        // noFill();
-        // stroke(255);
-        // strokeWeight(1);
-        // ellipse(this.cx, this.cy, this.range*2);
-
-        // Cannon
-        stroke(0);
-        strokeWeight(6);
-        line(this.cx, this.cy, this.aim[0], this.aim[1]);
+        drawTurret(this.posx, this.posy, this.aim);
     }
 
     this.calAim = function() {

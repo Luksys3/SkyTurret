@@ -38,6 +38,8 @@ function newTurret(options) {
     let id = makeid();
     options.id = id;
     turrets[id] = new Turret(options);
+
+    takenPos.push(options.x +'-'+ options.y);
 }
 
 function makeid() {

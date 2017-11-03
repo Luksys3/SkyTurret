@@ -92,8 +92,10 @@ function mouseClicked() {
     placement.turretSelected();
   }
 
-  if(placement.turretSelect && placement.cX != -1 && placement.cY != -1 && placement.inRange){
+  if(placement.turretSelect && placement.cX != -1 && placement.cY != -1 && placement.inRange && !posTaken(placement.cX, placement.cY)){
     newTurret({x: placement.cX, y: placement.cY});
+    placement.turretSelect = false;
+    placement.inRange = false;
   }
 }
 

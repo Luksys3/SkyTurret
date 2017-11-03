@@ -11,8 +11,9 @@ let path = [
 ];
 
 let turrets = {};
-let enemies = {};
 let bullets = {};
+let enemies = {};
+let takenPos = [];
 
 let bulletIDCount = 0;
 let enemyIDCount = 0;

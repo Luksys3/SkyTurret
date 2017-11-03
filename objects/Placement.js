@@ -71,13 +71,13 @@ function Placement(){
         p2y = shit;
       }
 
-      if(p1x <= this.cX && p2x >= this.cX && p1y <= this.cY && p2y >= this.cY ){
+      if( (p1x <= this.cX && p2x >= this.cX && p1y <= this.cY && p2y >= this.cY) ||
+         (this.cX < 0 || this.cY > 12 || this.cX > 12 || this.cY < 0)){
          this.inRange = false;
          return;
        }
     }
     this.inRange = true;
-
     if(this.inRange){
 
       this.draw2();

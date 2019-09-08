@@ -28,19 +28,21 @@ function changeLineLen(x1, y1, x2, y2, radius) {
 function newEnemy(options) {
     let id = makeid();
     options.id = id;
-    enemies[id] = new Enemy(options);
+    game.addEntity('enemies', id, new Enemy(options));
 }
 
 function newTurret(options) {
-    if( money < 30 ) return;
-    money -= 30;
+    if( game.getProperty('money') < 30 )
+		return;
+
+    game.decProperty('money', 30);
 
     let id = makeid();
     options.id = id;
-    turrets[id] = new Turret(options);
+    game.addEntity('turrets', id, new Turret(options));
 
     let key = options.x +'_'+ options.y;
-    takenPos[key] = 'turret';
+    takenPos[key] = 'turret'; // TODO: add to class Map setTaken(), isTaken(). Maybe change the names
 }
 
 function makeid() {
@@ -63,7 +65,7 @@ function hasOwnProperty(obj, prop) {
 
 // Uses global takenPos = {}
 function posTaken(x, y) {
-    return hasOwnProperty(takenPos, x +'_'+ y);
+    return typeof (takenPos[x +'_'+ y]) === "undefined" ? false : true;
 }
 
 function drawTurret(x, y, aim = '') {

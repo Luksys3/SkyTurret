@@ -41,9 +41,9 @@ function Placement(){
   }
 
   this.getCursor = function(){
-    if(this.cX != int(mouseX / 50) || this.cY != int((mouseY - 50) / 50)){
-      this.cX = int(mouseX / 50);
-      this.cY = int((mouseY - 50) / 50);
+    if(this.cX != parseInt(mouseX / 50) || this.cY != parseInt((mouseY - 50) / 50)){
+      this.cX = parseInt(mouseX / 50);
+      this.cY = parseInt((mouseY - 50) / 50);
     }
     this.checkInRange();
     }
@@ -51,12 +51,12 @@ function Placement(){
   this.checkInRange = function(){
 
 
-    for(let i = 0; i < path.length - 1; i++){
+    for(let i = 0; i < game.map.getPath().length - 1; i++){
 
-      let p1x = int(path[i][0] / 50);
-      let p1y = int((path[i][1] - 50) / 50);
-      let p2x = int(path[i + 1][0] / 50);
-      let p2y = int((path[i + 1][1] - 50) / 50);
+      let p1x = parseInt(game.map.getPath()[i][0] / 50);
+      let p1y = parseInt((game.map.getPath()[i][1] - 50) / 50);
+      let p2x = parseInt(game.map.getPath()[i + 1][0] / 50);
+      let p2y = parseInt((game.map.getPath()[i + 1][1] - 50) / 50);
 
       let shit;
 

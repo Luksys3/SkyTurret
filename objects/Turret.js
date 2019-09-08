@@ -30,8 +30,6 @@ function Turret(options) {
             this.shootDelayCounter = 0;
         }
         this.shootDelayCounter++;
-
-        this.draw();
     }
 
     this.draw = function() {

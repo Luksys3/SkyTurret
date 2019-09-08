@@ -21,4 +21,8 @@ function Wave() {
             });
         }
     }
+
+	this.getWaveNum = function () {
+		return this.wave;
+	}
 }

@@ -1,8 +1,8 @@
 function Enemy(options) {
     this.id = options.id;
     this.award = options.award;
-    this.x = path[0][0];
-    this.y = path[0][1] - 20 - options.space;
+    this.x = game.map.getPath();[0][0];
+    this.y = game.map.getPath()[0][1] - 20 - options.space;
 
     this.healthMax = options.health;
     this.health = this.healthMax;
@@ -11,7 +11,7 @@ function Enemy(options) {
     this.mspeed = 1;
 
     this.pathI = 0;
-    this.pathIM = path.length;
+    this.pathIM = game.map.getPath().length;
 
     this.update = function() {
         this.movement();
@@ -50,31 +50,31 @@ function Enemy(options) {
 
     this.movement = function(){
         if(this.pathI !== this.pathIM){
-            if(this.x === path[this.pathI][0] && this.y < path[this.pathI][1] ){
-                if(path[this.pathI][1] - this.y < this.mspeed){
-                    this.y += path[this.pathI][1] - this.y;
+            if(this.x === game.map.getPath()[this.pathI][0] && this.y < game.map.getPath()[this.pathI][1] ){
+                if(game.map.getPath()[this.pathI][1] - this.y < this.mspeed){
+                    this.y += game.map.getPath()[this.pathI][1] - this.y;
                 }else{
                     this.y += this.mspeed;
                 }
 
-            }else if(this.x < path[this.pathI][0] && this.y === path[this.pathI][1]){
-                if(path[this.pathI][0] - this.x < this.mspeed){
-                    this.x += path[this.pathI][0] - this.x;
+            }else if(this.x < game.map.getPath()[this.pathI][0] && this.y === game.map.getPath()[this.pathI][1]){
+                if(game.map.getPath()[this.pathI][0] - this.x < this.mspeed){
+                    this.x += game.map.getPath()[this.pathI][0] - this.x;
                 }else{
                     this.x += this.mspeed;
                 }
 
-            }else if(this.x === path[this.pathI][0] && this.y > path[this.pathI][1]){
-                if(this.y - path[this.pathI][1] < this.mspeed){
-                    this.y -= (this.y - path[this.pathI][1]);
+            }else if(this.x === game.map.getPath()[this.pathI][0] && this.y > game.map.getPath()[this.pathI][1]){
+                if(this.y - game.map.getPath()[this.pathI][1] < this.mspeed){
+                    this.y -= (this.y - game.map.getPath()[this.pathI][1]);
                 }else{
                     this.y -= this.mspeed;
                 }
 
-            }else if(this.x > path[this.pathI][0] && this.y === path[this.pathI][1]){
+            }else if(this.x > game.map.getPath()[this.pathI][0] && this.y === game.map.getPath()[this.pathI][1]){
 
-                if(this.x - path[this.pathI][0] < this.mspeed){
-                    this.x -= this.x - path[this.pathI][0];
+                if(this.x - game.map.getPath()[this.pathI][0] < this.mspeed){
+                    this.x -= this.x - game.map.getPath()[this.pathI][0];
                 }
                 this.x -= this.mspeed;
 
@@ -83,50 +83,50 @@ function Enemy(options) {
                 this.pathI++;
 
                 if(this.pathI !== this.pathIM){
-                    if(this.x === path[this.pathI][0] && this.y < path[this.pathI][1] ){
-                        if(path[this.pathI][1] - this.y < this.mspeed){
-                            this.y += path[this.pathI][1] - this.y;
+                    if(this.x === game.map.getPath()[this.pathI][0] && this.y < game.map.getPath()[this.pathI][1] ){
+                        if(game.map.getPath()[this.pathI][1] - this.y < this.mspeed){
+                            this.y += game.map.getPath()[this.pathI][1] - this.y;
                         }else{
                             this.y += this.mspeed;
                         }
 
-                    }else if(this.x < path[this.pathI][0] && this.y === path[this.pathI][1]){
-                        if(path[this.pathI][0] - this.x < this.mspeed){
-                            this.x += path[this.pathI][0] - this.x;
+                    }else if(this.x < game.map.getPath()[this.pathI][0] && this.y === game.map.getPath()[this.pathI][1]){
+                        if(game.map.getPath()[this.pathI][0] - this.x < this.mspeed){
+                            this.x += game.map.getPath()[this.pathI][0] - this.x;
                         }else{
                             this.x += this.mspeed;
                         }
 
-                    }else if(this.x === path[this.pathI][0] && this.y > path[this.pathI][1]){
-                        if(this.y - path[this.pathI][1] < this.mspeed){
-                            this.y -= (this.y - path[this.pathI][1]);
+                    }else if(this.x === game.map.getPath()[this.pathI][0] && this.y > game.map.getPath()[this.pathI][1]){
+                        if(this.y - game.map.getPath()[this.pathI][1] < this.mspeed){
+                            this.y -= (this.y - game.map.getPath()[this.pathI][1]);
                         }else{
                             this.y -= this.mspeed;
                         }
 
-                    }else if(this.x > path[this.pathI][0] && this.y === path[this.pathI][1]){
+                    }else if(this.x > game.map.getPath()[this.pathI][0] && this.y === game.map.getPath()[this.pathI][1]){
 
-                        if(this.x - path[this.pathI][0] < this.mspeed){
-                            this.x -= this.x - path[this.pathI][0];
+                        if(this.x - game.map.getPath()[this.pathI][0] < this.mspeed){
+                            this.x -= this.x - game.map.getPath()[this.pathI][0];
                         }
                         this.x -= this.mspeed;
 
                     }
                 }else{
                     this.pathI = 0;
-                    this.x = path[0][0];
-                    this.y = path[0][1] - 20;
+                    this.x = game.map.getPath()[0][0];
+                    this.y = game.map.getPath()[0][1] - 20;
                 }
             }
         }else{
             this.pathI = 0;
-            this.x = path[0][0];
-            this.y = path[0][1] - 20;
+            this.x = game.map.getPath()[0][0];
+            this.y = game.map.getPath()[0][1] - 20;
         }
     }
 
     this.die = function() {
-        money += this.award;
+        game.incProperty('money', this.award);
         delete enemies[this.id];
     }
 }

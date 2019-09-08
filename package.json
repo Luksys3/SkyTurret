@@ -1,0 +1,25 @@
+{
+  "name": "skyturret",
+  "version": "1.0.0",
+  "description": "Tower Defence Game",
+  "private": true,
+  "scripts": {
+    "build": "webpack --config webpack.config.js"
+  },
+  "keywords": [
+    "tower",
+    "turret",
+    "defence",
+    "game"
+  ],
+  "author": "Luksys3",
+  "license": "MIT",
+  "devDependencies": {
+    "webpack": "^4.14.0",
+    "webpack-cli": "^3.0.8"
+  },
+  "dependencies": {
+    "lodash": "^4.17.10",
+    "p5": "^0.6.1"
+  }
+}
